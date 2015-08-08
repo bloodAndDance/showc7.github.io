@@ -29,6 +29,17 @@
 This repository have no useful information at all. It was created just for fun and tests.
 
       </section>
+
+      <section>
+        <h3>
+<a id="rss-from-habrahabr.ru" class="anchor" href="#rss-from-habrahabr.ru" aria-hidden="true"><span class="octicon octicon-link"></span></a>RSS from habrahabr.ru</h3>
+
+        <div id="info">
+        </div>
+      </section>
+
+
+
       <footer>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
@@ -47,9 +58,38 @@ This repository have no useful information at all. It was created just for fun a
     </script>
 
     <script>
-      document.onload = function() {
-        alert('loaded');
-      }
+    var FEED_URL = 'http://habrahabr.ru/rss/interesting/';
+
+    var script = document.createElement('script');
+    script.src = 'http://code.jquery.com/jquery-1.11.0.min.js';
+    script.type = 'text/javascript';
+    document.getElementsByTagName('head')[0].appendChild(script);
+
+    window.addEventListener('load', function (event) {
+      console.log('loaded');
+
+      $.ajax({
+        url      : 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(FEED_URL),
+        dataType : 'json',
+        success  : function (data) {
+          if (data.responseData.feed && data.responseData.feed.entries) {
+            $.each(data.responseData.feed.entries, function (i, e) {
+              console.log(e);
+
+              var info = document.getElementById('info');
+              info.innerHTML = info.innerHTML +
+                "<div><br><div>" + e.title + "</div>" +
+                "<div>" + e.author + "</div>" +
+                "<div>" + e.contentSnippet + "</div>" +
+                "<div><a href=\"" + e.link + "\">more</a></div>" +
+                "</div>";
+            });
+          }
+        }
+      });
+    });
+
+
     </script>
 
   </body>
