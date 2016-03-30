@@ -30,7 +30,8 @@
             </a>
             About this repository
         </h3>
-        This repository have no useful information at all. It was created just for fun and tests.
+        This repository have no useful information at all. It was created just for fun and tests.<br/>
+        May be you know what rss feeds I can add? Tell me then: <a href="mailto:showc7@gmail.com">showc7@gmail.com</a>
       </section>
 
       <section>
@@ -45,7 +46,7 @@
                 <li class="active"><a id="0" href="#interesting">interesting</a></li>
                 <li><a href="#azure">azure</a></li>
                 <li><a href="#virus">virus</a></li>
-                <li><a href="#development">development</a></li>
+                <li><a href="#adme">adme</a></li>
             </ul>
         </div>
         <div id="info" />
@@ -71,7 +72,7 @@
         '#interesting':'http://habrahabr.ru/rss/interesting/',
         '#azure':'https://habrahabr.ru/rss/hub/azure/',
         '#virus':'https://habrahabr.ru/rss/hub/virus/',
-        '#development':'https://habrahabr.ru/rss/hub/development/'
+        '#adme':'http://www.adme.ru/rss/'
     };
 
     var script = document.createElement('script');
@@ -91,16 +92,14 @@
             $(prevActiveElement).parent().removeClass('active');
             prevActiveElement = this;
             $(this).parent().addClass('active');
-            console.log(this);
             source = $(this).attr('href')
-            console.log(source);
             Current_url_index = source;
             loadData();
         });
         
         function loadData() {
             $.ajax({
-                url      : 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(FEED_URLS[Current_url_index]),
+                url      : 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=20&callback=?&q=' + encodeURIComponent(FEED_URLS[Current_url_index]),
                 dataType : 'json',
                 success  : function (data) {
                 if (data.responseData.feed && data.responseData.feed.entries) {
