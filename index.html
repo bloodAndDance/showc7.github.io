@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/github-light.css">
     <script async src="javascripts/scale.fix.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
   </head>
   <body>
     <div class="wrapper">
@@ -25,20 +25,31 @@
       </header>
       <section>
         <h3>
-<a id="about-this-profile" class="anchor" href="#about-this-profile" aria-hidden="true"><span class="octicon octicon-link"></span></a>About this repository</h3>
-
-This repository have no useful information at all. It was created just for fun and tests.
-
+            <a id="about-this-profile" class="anchor" href="#about-this-profile" aria-hidden="true">
+                <span class="octicon octicon-link" />
+            </a>
+            About this repository
+        </h3>
+        This repository have no useful information at all. It was created just for fun and tests.
       </section>
 
       <section>
         <h3>
-<a id="rss-from-habrahabr.ru" class="anchor" href="#rss-from-habrahabr.ru" aria-hidden="true"><span class="octicon octicon-link"></span></a>RSS from habrahabr.ru</h3>
-
-        <div id="info">
+            <a id="rss-from-habrahabr.ru" class="anchor" href="#rss-from-habrahabr.ru" aria-hidden="true">
+                <span class="octicon octicon-link" />
+            </a>
+            RSS from habrahabr.ru
+        </h3>
+        <div id="menu">
+            <ul class="nav nav-tabs">
+                <li class="active"><a id="0" href="#interesting">interesting</a></li>
+                <li><a href="#azure">azure</a></li>
+                <li><a href="#virus">virus</a></li>
+                <li><a href="#development">development</a></li>
+            </ul>
         </div>
+        <div id="info" />
       </section>
-
 
 
       <footer>
@@ -55,7 +66,13 @@ This repository have no useful information at all. It was created just for fun a
     ga('create', 'UA-66112558-1', 'auto');
     ga('send', 'pageview');
 
-    var FEED_URL = 'http://habrahabr.ru/rss/interesting/';
+    var Current_url_index = '#interesting';
+    var FEED_URLS = {
+        '#interesting':'http://habrahabr.ru/rss/interesting/',
+        '#azure':'https://habrahabr.ru/rss/hub/azure/',
+        '#virus':'https://habrahabr.ru/rss/hub/virus/',
+        '#development':'https://habrahabr.ru/rss/hub/development/'
+    };
 
     var script = document.createElement('script');
     script.src = 'http://code.jquery.com/jquery-1.11.0.min.js';
@@ -64,25 +81,46 @@ This repository have no useful information at all. It was created just for fun a
 
     window.addEventListener('load', function (event) {
     //  console.log('loaded');
+      function menuClick(id) {
+        console.log(id);
+      }
+    
+      var prevActiveElement = $('#0');
+      
+        $(".nav-tabs a").click(function(){
+            $(prevActiveElement).parent().removeClass('active');
+            prevActiveElement = this;
+            $(this).parent().addClass('active');
+            console.log(this);
+            source = $(this).attr('href')
+            console.log(source);
+            Current_url_index = source;
+            loadData();
+        });
+        
+        function loadData() {
+            $.ajax({
+                url      : 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(FEED_URLS[Current_url_index]),
+                dataType : 'json',
+                success  : function (data) {
+                if (data.responseData.feed && data.responseData.feed.entries) {
+                    info.innerHTML = '';
+                    $.each(data.responseData.feed.entries, function (i, e) {
+                    //console.log(e);
 
-      $.ajax({
-        url      : 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(FEED_URL),
-        dataType : 'json',
-        success  : function (data) {
-          if (data.responseData.feed && data.responseData.feed.entries) {
-            $.each(data.responseData.feed.entries, function (i, e) {
-              //console.log(e);
-
-              var info = document.getElementById('info');
-              info.innerHTML = info.innerHTML +
-                "<div><br><div>" + e.title + "</div>" +
-                "<div>" + e.contentSnippet + "</div>" +
-                "<div><a href=\"" + e.link + "\">more</a></div>" +
-                "</div>";
-            });
-          }
+                    var info = document.getElementById('info');
+                    info.innerHTML = info.innerHTML +
+                        "<div><br><div>" + e.title + "</div>" +
+                        "<div>" + e.contentSnippet + "</div>" +
+                        "<div><a href=\"" + e.link + "\">more</a></div>" +
+                        "</div>";
+                    });
+                }
+            }
+        });
         }
-      });
+        
+        loadData();
     });
 
 
