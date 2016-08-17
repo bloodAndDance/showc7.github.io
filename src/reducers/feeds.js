@@ -1,6 +1,9 @@
 import {
   LOAD_NEWS_REQUEST,
-  LOAD_NEWS_SUCCESS
+  LOAD_NEWS_SUCCESS,
+  ADD_SOURCE,
+  REMOVE_SOURCE,
+  SET_NEWS_COUNT
 } from '../constants/FeedSource'
 
 const initialState = {
@@ -13,7 +16,8 @@ const initialState = {
     ],
   fetching: false,
   feedSourceInfo: [],
-  initLoading: false
+  initLoading: false,
+  newsCount: 20
 }
 
 export default function feeds(state=initialState, action) {
@@ -23,6 +27,17 @@ export default function feeds(state=initialState, action) {
 
     case LOAD_NEWS_SUCCESS:
       return { ...state, feedSourceInfo: action.payload, fetching: false};
+
+    case ADD_SOURCE:
+      return { ...state, feedsURLs: [ ...state.feedsURLs, {...action.payload} ]};
+
+    case REMOVE_SOURCE:
+      var urls = state.feedsURLs.slice();
+      urls.splice(action.payload, 1);
+      return { ...state, feedsURLs: [ ...urls ]};
+
+    case SET_NEWS_COUNT:
+      return { ...state, newsCount: action.payload }
 
     default:
       return state;

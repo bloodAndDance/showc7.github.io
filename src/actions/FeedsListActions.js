@@ -1,7 +1,10 @@
 import $ from 'jquery';
 import {
   LOAD_NEWS_REQUEST,
-  LOAD_NEWS_SUCCESS
+  LOAD_NEWS_SUCCESS,
+  ADD_SOURCE,
+  REMOVE_SOURCE,
+  SET_NEWS_COUNT
 } from '../constants/FeedSource';
 
 function loadInfo(url, newsCount, cb) {
@@ -32,6 +35,33 @@ export function getNews(sourceUrl, newsCount=20) {
         type: LOAD_NEWS_SUCCESS,
         payload: data
       })
+    });
+  }
+}
+
+export function addSource(url, name) {
+  return (dispatch) => {
+    dispatch({
+      type: ADD_SOURCE,
+      payload: {url: url, name: name}
+    });
+  }
+}
+
+export function removeSource(id) {
+  return (dispatch) => {
+    dispatch({
+      type: REMOVE_SOURCE,
+      payload: id
+    });
+  }
+}
+
+export function setNewsCount(count) {
+  return (dispatch) => {
+    dispatch({
+      type: SET_NEWS_COUNT,
+      payload: count
     });
   }
 }

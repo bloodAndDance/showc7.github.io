@@ -23,7 +23,7 @@ export default class FeedsList extends Component {
           {/*console.log(sources[i]);*/}
           var boundClick = this.handleClick.bind(this, sources[i].url, i);
           return(
-            <FeedSource onClick={boundClick} source={sources[i].name} id={i} url={sources[i].url} key={i}/>
+            <FeedSource onChange={boundClick} source={sources[i].name} id={i} url={sources[i].url} key={i}/>
           );
         }, sources)
       }

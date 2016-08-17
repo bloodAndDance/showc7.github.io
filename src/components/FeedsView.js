@@ -3,7 +3,7 @@ import FeedView from '../components/FeedView'
 
 export default class FeedsView extends Component {
   render() {
-    let { fetching, data } = this.props;
+    let { fetching, data, settings } = this.props;
     console.log(this.props);
     console.log(data);
     console.log(fetching);
@@ -13,7 +13,7 @@ export default class FeedsView extends Component {
         <p>Загрузка...</p>
         :
         data.map((item, i) => {
-          return (<FeedView  item={item} key={i}/>);
+          return (<FeedView  item={item} settings={settings} key={i}/>);
         }, data)
       }
     </div>);

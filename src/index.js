@@ -26,7 +26,8 @@ class RouterEnterEventHandlers {
     console.log(store.getState());
     console.log(store.getState().feeds);
     const { getNews } = feedsListActions;
-    getNews(store.getState().feeds.feedsURLs[nextState.params.sourceId].url)(store.dispatch);
+    getNews(store.getState().feeds.feedsURLs[nextState.params.sourceId].url,
+            store.getState().feeds.newsCount)(store.dispatch);
   }
 
   static settings() {

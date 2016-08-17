@@ -25,7 +25,7 @@ class App extends Component {
   }
 
   render() {
-    const { /*user, page,*/ feeds } = this.props;
+    const { /*user, page,*/ feeds, settings } = this.props;
     //const { getPhotos } = this.props.pageActions;
     const { getNews } = this.props.feedsListActions;
 
@@ -49,7 +49,7 @@ class App extends Component {
         </header>
         <section>
           <section>
-            <FeedsView data={feeds.feedSourceInfo} fetching={feeds.fetching} />
+            <FeedsView data={feeds.feedSourceInfo} fetching={feeds.fetching} settings={settings} />
             {this.props.children}
           </section>
         </section>
@@ -65,7 +65,8 @@ function mapStateToProps(state) {
   return {
     //user: state.user,
     //page: state.page,
-    feeds: state.feeds
+    feeds: state.feeds,
+    settings: state.settings
   }
 }
 

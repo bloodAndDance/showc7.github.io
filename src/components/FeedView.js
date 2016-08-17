@@ -5,46 +5,40 @@ export default class FeedView extends Component {
   createMarkup(content) { return {__html: content}; }
 
   render() {
-    const { item } = this.props;
-
-    let isShowTitle = true;
-    let isShowContentSnippet = true;
-    let isShowLink = true;
-    let isShowContent = false;
-    let isShowAuthor = false;
-    let isShowPublishedDate = false;
+    const { item, settings } = this.props;
+    console.log(settings);
 
     return (
       <div>
         <br/>
         {
           (() => {
-            return ( isShowTitle ? (<div>{ item.title }</div>) : (''));
+            return ( settings.ShowTitle ? (<div>{ item.title }</div>) : (''));
           })()
         }
         {
           (() => {
-            return (isShowContentSnippet ? (<div>{ item.contentSnippet }</div>):(''));
+            return (settings.ShowContentSnippet ? (<div>{ item.contentSnippet }</div>):(''));
           })()
         }
         {
           (() => {
-            return (isShowLink ? (<div><a href={ item.link }>more</a></div>):(''));
+            return (settings.ShowLink ? (<div><a href={ item.link }>more</a></div>):(''));
           })()
         }
         {
           (() => {
-            return (isShowContent ? (<div dangerouslySetInnerHTML={this.createMarkup(item.content)} />):(''));
+            return (settings.ShowContent ? (<div dangerouslySetInnerHTML={this.createMarkup(item.content)} />):(''));
           })()
         }
         {
           (() => {
-            return (isShowAuthor ? (<div>{ item.author }</div>):(''));
+            return (settings.ShowAuthor ? (<div>{ item.author }</div>):(''));
           })()
         }
         {
           (() => {
-            return (isShowPublishedDate ? (<div>{ item.publishedDate }</div>):(''));
+            return (settings.ShowPublishedDate ? (<div>{ item.publishedDate }</div>):(''));
           })()
         }
       </div>
