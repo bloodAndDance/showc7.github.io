@@ -3,6 +3,8 @@ var webpack = require('webpack')
 var NpmInstallPlugin = require('npm-install-webpack-plugin')
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
+var ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const chalk = require('chalk');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -19,7 +21,11 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new NpmInstallPlugin()
+    new NpmInstallPlugin(),
+    new ProgressBarPlugin({
+      format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+      clear: false
+    })
   ],
   module: {
     preLoaders: [
@@ -27,7 +33,7 @@ module.exports = {
         test: /\.js$/,
         loaders: ['eslint'],
         include: [
-          path.resolve(__dirname, "src"),
+          path.resolve(__dirname, 'src'),
         ],
       }
     ],
@@ -35,14 +41,14 @@ module.exports = {
       {
         loaders: ['react-hot', 'babel-loader'],
         include: [
-          path.resolve(__dirname, "src"),
+          path.resolve(__dirname, 'src'),
         ],
         test: /\.js$/,
         plugins: ['transform-runtime'],
       },
       {
         test:   /\.css$/,
-        loader: "style-loader!css-loader!postcss-loader"
+        loader: 'style-loader!css-loader!postcss-loader'
       }
     ]
   },

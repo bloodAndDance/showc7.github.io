@@ -13,8 +13,10 @@ export default class FeedSource extends Component {
     //</div>
 
 
-    return <div>
-      <Link to={'/source/' + id}>{source}</Link>
-    </div>
+    return (
+      <div>
+        <Link to={'/source/' + id}>{source}</Link>
+      </div>
+    )
   }
 }

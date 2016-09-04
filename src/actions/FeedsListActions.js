@@ -20,7 +20,7 @@ function loadInfo(url, newsCount, cb) {
 }
 
 export function getNews(sourceUrl, newsCount=20) {
-  console.log('!!! call getNews()');
+  console.log('!!! call getNews()', newsCount);
   return (dispatch) => {
     console.log(dispatch);
     console.log('!!! in getNews() return');

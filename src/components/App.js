@@ -10,7 +10,6 @@ import * as feedsListActions from '../actions/FeedsListActions'
 import { Link } from 'react-router'
 
 class App extends Component {
-
   componentWillMount() {
     console.log('willMount');
   }
@@ -33,29 +32,33 @@ class App extends Component {
     console.log(this.props.location);
 
     return (
-
-      <div class='wrapper' className='row'>
+      <div className='wrapper'>
         <header>
           <h1>light rss</h1>
           powered by React
           <p/>
-          <p class='view'>
+          <p className='view'>
             <a href='https://github.com/showc7'>View My Github Profile</a>
           </p>
+        </header>
 
+        <section>
+          <h3>
+            <a id='about-this-profile' className='anchor' href='#about-this-profile' aria-hidden='true'>
+                <span className='octicon octicon-link' />
+            </a>
+            About this repository
+          </h3>
           <Link to='settings'>Settings</Link>
           <FeedsList sources={feeds.feedsURLs} getNews={getNews} getNow={this.props.params.sourceId} initLoading={feeds.initLoading}/>
-
-        </header>
-        <section>
-          <section>
-            <FeedsView data={feeds.feedSourceInfo} fetching={feeds.fetching} settings={settings} />
-            {this.props.children}
-          </section>
+          <FeedsView data={feeds.feedSourceInfo} fetching={feeds.fetching} settings={settings} />
+          {this.props.children}
         </section>
+
         <footer>
           <p><small>Hosted on GitHub Pages &mdash; Theme by <a href='https://github.com/orderedlist'>orderedlist</a></small></p>
         </footer>
+
       </div>
     );
   }

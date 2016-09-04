@@ -48,6 +48,11 @@ export default class Settings extends Component {
     var boundAddSourceClick = this.addSourceClick.bind(this);
 
     return (<div>
+      <p>Settings page!</p>
+      <Link to='/'>home</Link>
+      <br/>
+      <br/>
+      
       {
         s.map( (value, i) => {
           console.log(value);
@@ -62,9 +67,6 @@ export default class Settings extends Component {
       }
 
       <ShowFeedsFromSourceCount currentValue={feeds.newsCount} onChange={this.showFeedsFromSourceCountOnChange.bind(this)}/>
-
-      <p>Settings page!</p>
-      <Link to='/'>home</Link>
 
       {
         feeds.feedsURLs.map((value, i) => {
@@ -82,16 +84,6 @@ export default class Settings extends Component {
     </div>);
   }
 }
-//<input type='checkbox' checked={value.value} onChange={this.checkboxOnChange}/>{value.name}
-/*
-<br/>
-show author
-<input
-    type='checkbox'
-    checked={isChecked}
-    onChange={this.checkboxOnChange}
-/>
-*/
 
 function mapStateToProps(state) {
   return {
@@ -103,7 +95,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     settingsActions: bindActionCreators(settingsActions, dispatch),
-    feedsListActions:bindActionCreators(feedsListActions, dispatch)
+    feedsListActions: bindActionCreators(feedsListActions, dispatch)
   }
 }
 

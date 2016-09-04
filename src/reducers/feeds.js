@@ -16,14 +16,13 @@ const initialState = {
     ],
   fetching: false,
   feedSourceInfo: [],
-  initLoading: false,
   newsCount: 20
 }
 
 export default function feeds(state=initialState, action) {
   switch (action.type) {
     case LOAD_NEWS_REQUEST:
-      return { ...state, feedSourceInfo: action.payload, fetching: true, initLoading: true};
+      return { ...state, feedSourceInfo: action.payload, fetching: true};
 
     case LOAD_NEWS_SUCCESS:
       return { ...state, feedSourceInfo: action.payload, fetching: false};

@@ -1,22 +1,25 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import App from './components/App'
-import Settings from './components/Settings'
-import './styles/app.css'
-import configureStore from './store/configureStore'
-import NotFound from './components/NotFound'
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import App from './components/App';
+import Settings from './components/Settings';
+import './styles/app.css';
+import configureStore from './store/configureStore';
+import NotFound from './components/NotFound';
 
 import * as feedsListActions from './actions/FeedsListActions';
 
-import { Router, Route, /*IndexRoute,*/ hashHistory } from 'react-router'
+import { Router, Route, /*IndexRoute,*/ hashHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 
 const store = configureStore()
+const history = syncHistoryWithStore(hashHistory, store)
 
 class RouterEnterEventHandlers {
   static app(nextState, replaceState) {
-    console.log('redirect to /source/0');
-    replaceState({}, '/source/0');
+    //console.log('redirect to /source/0');
+    //replaceState({}, '/source/0');
+    console.log(replaceState);
   }
 
   static source(nextState) {
@@ -38,7 +41,7 @@ class RouterEnterEventHandlers {
 render(
   <Provider store={store}>
     <div className='app'>
-      <Router history={hashHistory}>
+      <Router history={history}>
         <Route path='/' component={App} onEnter={ RouterEnterEventHandlers.app }/>
         <Route path='/settings' component={Settings} onEnter={ RouterEnterEventHandlers.settings }/>
         <Route path='/source/:sourceId' component={App} onEnter={ RouterEnterEventHandlers.source }/>

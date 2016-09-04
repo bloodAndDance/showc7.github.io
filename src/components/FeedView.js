@@ -6,7 +6,6 @@ export default class FeedView extends Component {
 
   render() {
     const { item, settings } = this.props;
-    console.log(settings);
 
     return (
       <div>
