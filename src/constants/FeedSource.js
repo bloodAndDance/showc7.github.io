@@ -1,0 +1,6 @@
+export const LOAD_NEWS = 'LOAD_NEWS';
+export const LOAD_NEWS_REQUEST = 'LOAD_NEWS_REQUEST';
+export const LOAD_NEWS_SUCCESS = 'LOAD_NEWS_SUCCESS';
+export const ADD_SOURCE = 'ADD_SOURCE';
+export const REMOVE_SOURCE = 'REMOVE_SOURCE';
+export const SET_NEWS_COUNT = 'SET_NEWS_COUNT';
