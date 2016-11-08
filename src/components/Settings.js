@@ -9,7 +9,7 @@ import FeedSourceInfo from './FeedSourceInfo';
 import AddSource from './AddSource';
 import ShowFeedsFromSourceCount from './ShowFeedsFromSourceCount';
 
-export default class Settings extends Component {
+class Settings extends Component {
 
   checkboxOnChange(key, value) {
     console.log('checkbox state changed' + value);
@@ -52,7 +52,7 @@ export default class Settings extends Component {
       <Link to='/'>home</Link>
       <br/>
       <br/>
-      
+
       {
         s.map( (value, i) => {
           console.log(value);

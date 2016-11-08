@@ -20,7 +20,7 @@ export default class FeedsList extends Component {
     return (<div>
       {
         sources.map((item, i) => {
-          {/*console.log(sources[i]);*/}
+          /*{console.log(sources[i]);}*/
           var boundClick = this.handleClick.bind(this, sources[i].url, i);
           return(
             <FeedSource onChange={boundClick} source={sources[i].name} id={i} url={sources[i].url} key={i}/>
