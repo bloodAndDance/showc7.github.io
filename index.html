@@ -1,129 +1,17 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Showc7.GitHub.io by showc7</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <script async src="javascripts/scale.fix.js"></script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Showc7.GitHub.io</h1>
-        <p></p>
-
-
-        <p class="view"><a href="https://github.com/showc7">View My GitHub Profile</a></p>
-
-      </header>
-      <section>
-        <h3>
-            <a id="about-this-profile" class="anchor" href="#about-this-profile" aria-hidden="true">
-                <span class="octicon octicon-link" />
-            </a>
-            About this repository
-        </h3>
-        This repository have no useful information at all. It was created just for fun and tests.<br/>
-        May be you know what rss feeds I can add? Tell me then: <a href="mailto:showc7@gmail.com">showc7@gmail.com</a>
-      </section>
-
-      <section>
-        <h3>
-            <a id="rss-from-habrahabr.ru" class="anchor" href="#rss-from-habrahabr.ru" aria-hidden="true">
-                <span class="octicon octicon-link" />
-            </a>
-            RSS from habrahabr.ru
-        </h3>
-        <div id="menu">
-            <ul class="nav nav-tabs">
-                <li class="active"><a id="0" href="#interesting">interesting</a></li>
-                <li><a href="#azure">azure</a></li>
-                <li><a href="#virus">virus</a></li>
-                <li><a href="#development">development</a></li>
-            </ul>
-        </div>
-        <div id="info" />
-      </section>
-
-
-      <footer>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-
-    <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-66112558-1', 'auto');
-    ga('send', 'pageview');
-
-    var Current_url_index = '#interesting';
-    var FEED_URLS = {
-        '#interesting':'http://habrahabr.ru/rss/interesting/',
-        '#azure':'https://habrahabr.ru/rss/hub/azure/',
-        '#virus':'https://habrahabr.ru/rss/hub/virus/',
-        '#development':'https://habrahabr.ru/rss/hub/development/'
-    };
-
-    var script = document.createElement('script');
-    script.src = 'http://code.jquery.com/jquery-1.11.0.min.js';
-    script.type = 'text/javascript';
-    document.getElementsByTagName('head')[0].appendChild(script);
-
-    window.addEventListener('load', function (event) {
-    //  console.log('loaded');
-      function menuClick(id) {
-        console.log(id);
+<head>
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
+  <script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "14986561-b45b-4e38-900a-e7bb5bfbc8e8",
+      autoRegister: true, /* Set to true to automatically prompt visitors */
+      httpPermissionRequest: {
+        enable: true
+      },
+      notifyButton: {
+          enable: true /* Set to false to hide */
       }
-    
-      var prevActiveElement = $('#0');
-      
-        $(".nav-tabs a").click(function(){
-            $(prevActiveElement).parent().removeClass('active');
-            prevActiveElement = this;
-            $(this).parent().addClass('active');
-            source = $(this).attr('href')
-            Current_url_index = source;
-            loadData();
-        });
-        
-        function loadData() {
-            $.ajax({
-                url      : 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=20&callback=?&q=' + encodeURIComponent(FEED_URLS[Current_url_index]),
-                dataType : 'json',
-                success  : function (data) {
-                if (data.responseData.feed && data.responseData.feed.entries) {
-                    info.innerHTML = '';
-                    $.each(data.responseData.feed.entries, function (i, e) {
-                    //console.log(e);
-
-                    var info = document.getElementById('info');
-                    info.innerHTML = info.innerHTML +
-                        "<div><br><div>" + e.title + "</div>" +
-                        "<div>" + e.contentSnippet + "</div>" +
-                        "<div><a href=\"" + e.link + "\">more</a></div>" +
-                        "</div>";
-                    });
-                }
-            }
-        });
-        }
-        
-        loadData();
-    });
-
-
-    </script>
-
-  </body>
-</html>
+    }]);
+  </script>
+</head>
