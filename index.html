@@ -3,16 +3,20 @@
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
   <script>
     var OneSignal = window.OneSignal || [];
-    OneSignal.push(["init", {
-      appId: "14986561-b45b-4e38-900a-e7bb5bfbc8e8",
-      subdomainName: "showc7-github",
-      autoRegister: true, /* Set to true to automatically prompt visitors */
-      httpPermissionRequest: {
-        enable: true
-      },
-      notifyButton: {
+    OneSignal.push(() => {
+      OneSignal.init({
+        appId: "14986561-b45b-4e38-900a-e7bb5bfbc8e8",
+        subdomainName: "showc7-github",
+        autoRegister: true, /* Set to true to automatically prompt visitors */
+        httpPermissionRequest: {
+          enable: true
+        },
+        notifyButton: {
           enable: true /* Set to false to hide */
-      }
-    }]);
+        }
+      });
+      
+      OneSignal.pendTags({ user_id: '1' });
+    });
   </script>
 </head>
